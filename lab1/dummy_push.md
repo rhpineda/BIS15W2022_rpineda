@@ -1,6 +1,6 @@
 ---
 title: "Dummy Push"
-author: "Your Name"
+author: "Ricardo Pineda"
 date: "2022-01-04"
 output: 
   html_document: 
@@ -25,7 +25,7 @@ install.packages("tidyverse")
 ## package 'tidyverse' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\Buzzer\AppData\Local\Temp\Rtmp0O4oyZ\downloaded_packages
+## 	C:\Users\Buzzer\AppData\Local\Temp\RtmpUP6NCP\downloaded_packages
 ```
 
 ```r
@@ -41,7 +41,7 @@ install.packages("nycflights13")
 ## package 'nycflights13' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\Buzzer\AppData\Local\Temp\Rtmp0O4oyZ\downloaded_packages
+## 	C:\Users\Buzzer\AppData\Local\Temp\RtmpUP6NCP\downloaded_packages
 ```
 
 ## Working directory
