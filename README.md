@@ -8,6 +8,6 @@
 
 #### Major: Genetics and Genomics
 #### Year: 3rd Year
-#### Favorite Dog: Shiba Inu
-#### Home Town: Toledo, OH
+
+
 
