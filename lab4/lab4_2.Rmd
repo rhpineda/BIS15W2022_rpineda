@@ -119,37 +119,41 @@ filter(fish, length > 400, (scalelength > 11 | radii_length_mm > 8))
 ## Practice  
 1. Have a look at the mammals data using the summary functions of your choosing.    
 ```{r}
-
+glimpse(mammals);
+names(mammals);
 ```
 
 2. What are the names of the variables in the mammals data?  
 ```{r}
-
+names(mammals);
 ```
+[1] "order"            "family"           "genus"            "species"          "mass"             "gestation"        "newborn"         
+[8] "weaning"          "wean_mass"        "AFR"              "max_life"         "litter_size"      "litters_per_year"
 
 3.  From the `mammals` data, filter all members of the family Bovidae with a mass greater than 450000.
 ```{r}
-
+filter(mammals, family == "Bovidae" & mass > 450000)
 ```
 
 4. Let's say we are only interested in family, genus, species, mass, and gestation. Relimit the mammals data frame to these variables.  
 ```{r}
-
+mammals <- select(mammals, "family", "genus", "species", mass, gestation);
+mammals
 ```
 
 5. Use the output from #4 to focus on the family Bovidae with a mass greater than 450000.
 ```{r}
-
+filter(mammals, family == "Bovidae" & mass > 450000)
 ```
 
 6. From the `mammals` data, build a data frame that compares `mass`, `gestation`, and `newborn` among the primate genera `Lophocebus`, `Erythrocebus`, and `Macaca`. Among these genera, which species has the smallest `newborn` mass?
 ```{r}
-
+mammals <- readr::read_csv("data/mammal_lifehistories_v2.csv");
+mammals <- filter(mammals, Genus == "Lophocebus" |Genus == "Erythrocebus" | Genus == "Macaca" )
+mammals <- select(mammals, Genus, mass, gestation, newborn);
 ```
+Macaca.
 
-```{r}
-
-```
 
 ## Wrap-up  
 
