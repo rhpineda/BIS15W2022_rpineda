@@ -695,6 +695,10 @@ superhero_powers %>%
 ## #   energy_blasts <lgl>, duplication <lgl>, size_changing <lgl>, ...
 ```
 
+```r
+#97
+```
+
 ## Your Favorite
 15. Pick your favorite superhero and let's see their powers!
 

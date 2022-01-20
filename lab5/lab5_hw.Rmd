@@ -60,6 +60,7 @@ tabyl(superhero_info, alignment)
 2. Notice that we have some neutral superheros! Who are they?
 ```{r}
 filter(superhero_info, superhero_info$alignment == "neutral")
+
 ```
 
 ## `superhero_info`
@@ -156,6 +157,8 @@ superhero_powers %>%
   filter(accelerated_healing) %>%
   filter(durability) %>%
   filter(super_strength);
+
+#97
 ```
 
 ## Your Favorite
