@@ -119,29 +119,48 @@ new_fisheries %>%
 
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
 ```{r}
+#new_fisheries %>%
+#  filter(between(year, 1990,2000)) %>%
+#  filter(!is.na(catch)) %>%
+#  filter(asfis_species_name == "Sardina pilchardus") %>%
+#  group_by(country) %>%
+#  summarize(max_catch = max(catch)) %>%
+#  arrange(desc(max_catch))
+#I originally thought the question was asking most catches in a given year.
+
 new_fisheries %>%
   filter(between(year, 1990,2000)) %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name == "Sardina pilchardus") %>%
   group_by(country) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch))
-
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 1)
 #Morocco
 ```
 
 8. Which five countries caught the most cephalopods between 2008-2012?
 ```{r}
+#new_fisheries %>%
+#  filter(between(year, 2008,2012)) %>%
+#  filter(!is.na(catch)) %>%
+#  filter(asfis_species_name == "Cephalopoda") %>%
+#  group_by(country) %>%
+#  summarize(max_catch = max(catch)) %>%
+#  arrange(desc(max_catch)) %>%
+#  head(max_catch, n = 5)
+#I originally thought the question was asking most catches in a given year.
+
 new_fisheries %>%
   filter(between(year, 2008,2012)) %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name == "Cephalopoda") %>%
   group_by(country) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch)) %>%
-  head(max_catch, n = 5)
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 5)
 
-#India, China, Italy, Spain, and Algeria
+#India, China, Spain, Algeria, France
   
 ```
 
@@ -152,9 +171,9 @@ new_fisheries %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name != "Osteichthyes") %>%
   group_by(asfis_species_name) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch)) %>%
-  head(max_catch, n = 5)
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 5)
 
 #T. lepturus.
 ```
