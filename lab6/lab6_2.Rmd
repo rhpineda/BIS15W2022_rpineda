@@ -24,7 +24,7 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 library("tidyverse")
 library("janitor")
 library("skimr")
-library?summari("palmerpenguins")
+library("palmerpenguins")
 ```
 
 ## Review
