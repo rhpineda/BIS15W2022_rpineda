@@ -2,10 +2,11 @@
 title: "summarize practice, `count()`, `across()`"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -23,13 +24,14 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 library("tidyverse")
 library("janitor")
 library("skimr")
-library("palmerpenguins")
+library?summari("palmerpenguins")
 ```
 
 ## Review
 The summarize() and group_by() functions are powerful tools that we can use to produce clean summaries of data. Especially when used together, we can quickly group variables of interest and save time. Let's do some practice with the [palmerpenguins(https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data to refresh our memory.
 ```{r}
 glimpse(penguins)
+skim(penguins)
 ```
 
 As biologists, a good question that we may ask is how do the measured variables differ by island (on average)?
@@ -106,17 +108,39 @@ penguins %>%
 ## Practice
 1. Produce a summary of the mean for bill_length_mm, bill_depth_mm, flipper_length_mm, and body_mass_g within Adelie penguins only. Be sure to provide the number of samples.
 ```{r}
+#names(penguins)
 
+penguins %>% 
+    filter(species == "Adelie") %>% 
+    filter(!is.na(bill_length_mm)) %>% 
+    filter(!is.na(bill_depth_mm)) %>% 
+    filter(!is.na(flipper_length_mm)) %>% 
+    summarize(mean_bill_length_mm = mean(bill_length_mm), 
+              mean_bill_depth_mm = mean(bill_depth_mm),
+              mean_flipper_length_mm = mean(flipper_length_mm),
+              total = n())
 ```
 
 2. How does the mean of `bill_length_mm` compare between penguin species?
 ```{r}
+penguins %>% 
+    
+   filter(!is.na(bill_length_mm)) %>% 
+   
+   group_by(species) %>% 
+  
+   summarize(mean_bill_length_mm = mean(bill_length_mm), total = n())
 
 ```
 
 3. For some penguins, their sex is listed as NA. Where do these penguins occur?
 ```{r}
+penguins %>%
+  filter(is.na(sex)) %>%
+  group_by(island) %>%
+  count(species)
 
+#They occur on the islands of Torgersen and, Dream, Biscoe
 ```
 
 ## `across()`
@@ -151,6 +175,9 @@ penguins %>%
 table1 <- penguins %>%
   group_by(sex) %>% 
   summarize(across(contains("mm"), mean, na.rm=T))
+
+table1
+
 ```
 
 Here we summarize across all variables.
@@ -172,10 +199,52 @@ penguins %>%
   summarise(across(starts_with("bill"), n_distinct))
 ```
 
+```{r}
+penguins <- penguins
+```
+
 ## Practice
 1. Produce separate summaries of the mean and standard deviation for bill_length_mm, bill_depth_mm, and flipper_length_mm for each penguin species. Be sure to provide the number of samples.  
 mean
 ```{r}
+#penguins %>%
+#group_by(species) %>% 
+#select(bill_length_mm, bill_depth_mm, flipper_length_mm)
+#summarize_all()
+
+#summarize(n=n(), .groups= 'keep')
+  
+```
+
+```{r}
+
+  
+ #   filter(!is.na(bill_length_mm)) %>% 
+#  summarise(mean_bill_length_mm = mean(bill_length_mm), 
+#            stdev_bill_length_mm = sd(bill_length_mm),
+#            mean_bill_depth_mm = mean(bill_depth_mm), 
+#            stdev_bill_depth_mm = sd(bill_depth_mm),
+#            mean_flipper_length_mm = mean(flipper_length_mm), 
+#            stdev_flipper_length_mm = sd(flipper_length_mm),
+#                                      total = n())
+
+##table1 <- penguins %>%
+  #group_by(sex) %>% 
+  #summarize(across(contains("mm"), mean, na.rm=T))
+  
+```
+
+```{r}
+#Mean summary
+penguins %>%
+group_by(species) %>% 
+summarize(across(contains("mm"), mean, na.rm=T))
+
+#STDEV summary
+penguins %>%
+group_by(species) %>% 
+summarize(across(contains("mm"), sd, na.rm=T))
+
 
 ```
 
