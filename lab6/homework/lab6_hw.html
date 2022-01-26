@@ -461,48 +461,58 @@ new_fisheries</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Which country caught the most sardines (<em>Sardina pilchardus</em>) between the years 1990-2000?</li>
 </ol>
-<pre class="r"><code>new_fisheries %&gt;%
+<pre class="r"><code>#new_fisheries %&gt;%
+#  filter(between(year, 1990,2000)) %&gt;%
+#  filter(!is.na(catch)) %&gt;%
+#  filter(asfis_species_name == &quot;Sardina pilchardus&quot;) %&gt;%
+#  group_by(country) %&gt;%
+#  summarize(max_catch = max(catch)) %&gt;%
+#  arrange(desc(max_catch))
+#I originally thought the question was asking most catches in a given year.
+
+new_fisheries %&gt;%
   filter(between(year, 1990,2000)) %&gt;%
   filter(!is.na(catch)) %&gt;%
   filter(asfis_species_name == &quot;Sardina pilchardus&quot;) %&gt;%
   group_by(country) %&gt;%
-  summarize(max_catch = max(catch)) %&gt;%
-  arrange(desc(max_catch))</code></pre>
-<pre><code>## # A tibble: 37 x 2
-##    country                  max_catch
-##    &lt;fct&gt;                        &lt;dbl&gt;
-##  1 Morocco                        947
-##  2 Spain                          912
-##  3 Russian Federation             627
-##  4 Ukraine                        381
-##  5 Turkey                          99
-##  6 France                          97
-##  7 Denmark                         96
-##  8 Greece                          96
-##  9 Saint Vincent/Grenadines        96
-## 10 Algeria                         95
-## # ... with 27 more rows</code></pre>
+  summarize(sum_catch = sum(catch)) %&gt;%
+  arrange(desc(sum_catch)) %&gt;%
+  head(sum_catch, n = 1)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   country sum_catch
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 Morocco      7470</code></pre>
 <pre class="r"><code>#Morocco</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Which five countries caught the most cephalopods between 2008-2012?</li>
 </ol>
-<pre class="r"><code>new_fisheries %&gt;%
+<pre class="r"><code>#new_fisheries %&gt;%
+#  filter(between(year, 2008,2012)) %&gt;%
+#  filter(!is.na(catch)) %&gt;%
+#  filter(asfis_species_name == &quot;Cephalopoda&quot;) %&gt;%
+#  group_by(country) %&gt;%
+#  summarize(max_catch = max(catch)) %&gt;%
+#  arrange(desc(max_catch)) %&gt;%
+#  head(max_catch, n = 5)
+#I originally thought the question was asking most catches in a given year.
+
+new_fisheries %&gt;%
   filter(between(year, 2008,2012)) %&gt;%
   filter(!is.na(catch)) %&gt;%
   filter(asfis_species_name == &quot;Cephalopoda&quot;) %&gt;%
   group_by(country) %&gt;%
-  summarize(max_catch = max(catch)) %&gt;%
-  arrange(desc(max_catch)) %&gt;%
-  head(max_catch, n = 5)</code></pre>
+  summarize(sum_catch = sum(catch)) %&gt;%
+  arrange(desc(sum_catch)) %&gt;%
+  head(sum_catch, n = 5)</code></pre>
 <pre><code>## # A tibble: 5 x 2
-##   country max_catch
+##   country sum_catch
 ##   &lt;fct&gt;       &lt;dbl&gt;
-## 1 India          94
-## 2 China          86
-## 3 Italy          66
-## 4 Spain          57
-## 5 Algeria        54</code></pre>
-<pre class="r"><code>#India, China, Italy, Spain, and Algeria</code></pre>
+## 1 India         570
+## 2 China         257
+## 3 Spain         198
+## 4 Algeria       162
+## 5 France        101</code></pre>
+<pre class="r"><code>#India, China, Spain, Algeria, France</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Which species had the highest catch total between 2008-2012? (hint: Osteichthyes is not a species)</li>
 </ol>
@@ -511,17 +521,17 @@ new_fisheries</code></pre>
   filter(!is.na(catch)) %&gt;%
   filter(asfis_species_name != &quot;Osteichthyes&quot;) %&gt;%
   group_by(asfis_species_name) %&gt;%
-  summarize(max_catch = max(catch)) %&gt;%
-  arrange(desc(max_catch)) %&gt;%
-  head(max_catch, n = 5)</code></pre>
+  summarize(sum_catch = sum(catch)) %&gt;%
+  arrange(desc(sum_catch)) %&gt;%
+  head(sum_catch, n = 5)</code></pre>
 <pre><code>## # A tibble: 5 x 2
-##   asfis_species_name    max_catch
+##   asfis_species_name    sum_catch
 ##   &lt;chr&gt;                     &lt;dbl&gt;
-## 1 Trichiurus lepturus        8221
-## 2 Theragra chalcogramma      8188
-## 3 Engraulis ringens          7981
-## 4 Clupea harengus            7873
-## 5 Katsuwonus pelamis          997</code></pre>
+## 1 Theragra chalcogramma     41075
+## 2 Engraulis ringens         35523
+## 3 Katsuwonus pelamis        32153
+## 4 Trichiurus lepturus       30400
+## 5 Clupea harengus           28527</code></pre>
 <pre class="r"><code>#T. lepturus.</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Use the data to do at least one analysis of your choice.</li>

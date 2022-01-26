@@ -373,30 +373,30 @@ new_fisheries %>%
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
 
 ```r
+#new_fisheries %>%
+#  filter(between(year, 1990,2000)) %>%
+#  filter(!is.na(catch)) %>%
+#  filter(asfis_species_name == "Sardina pilchardus") %>%
+#  group_by(country) %>%
+#  summarize(max_catch = max(catch)) %>%
+#  arrange(desc(max_catch))
+#I originally thought the question was asking most catches in a given year.
+
 new_fisheries %>%
   filter(between(year, 1990,2000)) %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name == "Sardina pilchardus") %>%
   group_by(country) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch))
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 1)
 ```
 
 ```
-## # A tibble: 37 x 2
-##    country                  max_catch
-##    <fct>                        <dbl>
-##  1 Morocco                        947
-##  2 Spain                          912
-##  3 Russian Federation             627
-##  4 Ukraine                        381
-##  5 Turkey                          99
-##  6 France                          97
-##  7 Denmark                         96
-##  8 Greece                          96
-##  9 Saint Vincent/Grenadines        96
-## 10 Algeria                         95
-## # ... with 27 more rows
+## # A tibble: 1 x 2
+##   country sum_catch
+##   <fct>       <dbl>
+## 1 Morocco      7470
 ```
 
 ```r
@@ -406,29 +406,39 @@ new_fisheries %>%
 8. Which five countries caught the most cephalopods between 2008-2012?
 
 ```r
+#new_fisheries %>%
+#  filter(between(year, 2008,2012)) %>%
+#  filter(!is.na(catch)) %>%
+#  filter(asfis_species_name == "Cephalopoda") %>%
+#  group_by(country) %>%
+#  summarize(max_catch = max(catch)) %>%
+#  arrange(desc(max_catch)) %>%
+#  head(max_catch, n = 5)
+#I originally thought the question was asking most catches in a given year.
+
 new_fisheries %>%
   filter(between(year, 2008,2012)) %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name == "Cephalopoda") %>%
   group_by(country) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch)) %>%
-  head(max_catch, n = 5)
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 5)
 ```
 
 ```
 ## # A tibble: 5 x 2
-##   country max_catch
+##   country sum_catch
 ##   <fct>       <dbl>
-## 1 India          94
-## 2 China          86
-## 3 Italy          66
-## 4 Spain          57
-## 5 Algeria        54
+## 1 India         570
+## 2 China         257
+## 3 Spain         198
+## 4 Algeria       162
+## 5 France        101
 ```
 
 ```r
-#India, China, Italy, Spain, and Algeria
+#India, China, Spain, Algeria, France
 ```
 
 9. Which species had the highest catch total between 2008-2012? (hint: Osteichthyes is not a species)
@@ -439,20 +449,20 @@ new_fisheries %>%
   filter(!is.na(catch)) %>%
   filter(asfis_species_name != "Osteichthyes") %>%
   group_by(asfis_species_name) %>%
-  summarize(max_catch = max(catch)) %>%
-  arrange(desc(max_catch)) %>%
-  head(max_catch, n = 5)
+  summarize(sum_catch = sum(catch)) %>%
+  arrange(desc(sum_catch)) %>%
+  head(sum_catch, n = 5)
 ```
 
 ```
 ## # A tibble: 5 x 2
-##   asfis_species_name    max_catch
+##   asfis_species_name    sum_catch
 ##   <chr>                     <dbl>
-## 1 Trichiurus lepturus        8221
-## 2 Theragra chalcogramma      8188
-## 3 Engraulis ringens          7981
-## 4 Clupea harengus            7873
-## 5 Katsuwonus pelamis          997
+## 1 Theragra chalcogramma     41075
+## 2 Engraulis ringens         35523
+## 3 Katsuwonus pelamis        32153
+## 4 Trichiurus lepturus       30400
+## 5 Clupea harengus           28527
 ```
 
 ```r
