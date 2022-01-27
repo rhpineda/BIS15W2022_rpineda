@@ -420,7 +420,7 @@ gabon;</code></pre>
 <ol start="12" style="list-style-type: decimal">
 <li>(4 points) Based on your interest, do one exploratory analysis on the <code>gabon</code> data of your choice. This analysis needs to include a minimum of two functions in <code>dplyr.</code></li>
 </ol>
-<pre class="r"><code>#Comparing amount of vegetation and land use.
+<pre class="r"><code>#What land use has the most vegatation?
 gabon %&gt;%
   group_by(land_use) %&gt;%
   summarize(across(contains(&quot;veg&quot;), mean)) %&gt;%

@@ -396,7 +396,7 @@ gabon %>%
 
 
 ```r
-#Comparing amount of vegetation and land use.
+#What land use has the most vegatation?
 gabon %>%
   group_by(land_use) %>%
   summarize(across(contains("veg"), mean)) %>%

@@ -160,7 +160,7 @@ gabon %>%
 12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`
 
 ```{r}
-#Comparing amount of vegetation and land use.
+#What land use has the most vegatation?
 gabon %>%
   group_by(land_use) %>%
   summarize(across(contains("veg"), mean)) %>%
