@@ -23,6 +23,8 @@ This exam is due by 12:00p on Thursday, January 27.
 If you plan to use any other libraries to complete this assignment then you should load them here.
 ```{r}
 library(tidyverse)
+library(janitor)
+library(skimr)
 ```
 
 ## Questions  
@@ -141,8 +143,28 @@ gabon %>%
 11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let's try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 3km from a village to sites that are greater than 25km from a village? The variable `Distance` measures the distance of the transect from the nearest village. Hint: try using the `across` operator.  
 
 ```{r}
+gabon %>%
+  filter(distance > 25 | distance < 3) %>%
+  group_by(distance) %>%
+  summarize(across(c(ra_apes, ra_birds, ra_elephant, ra_monkeys, ra_rodent, ra_ungulate)))  
 
+#Apes: Fits conclusion
+#Birds: Does not fit conclusion
+#Elephant: Does not fit conclusion
+#Monkey: Fits conclusion
+#Rodent: Does not fit conclusion
+#Ungulate: Fits conclusion
 ```
 
 
 12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`
+
+```{r}
+#Comparing amount of vegetation and land use.
+gabon %>%
+  group_by(land_use) %>%
+  summarize(across(contains("veg"), mean)) %>%
+  arrange(desc(veg_rich))
+  
+```
+
