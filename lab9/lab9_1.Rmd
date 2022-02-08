@@ -77,11 +77,7 @@ ggplot(data=iris, mapping=aes(x=Species, y=Petal.Length))+geom_boxplot()
 ## Practice
 1. Use the iris data to build a scatterplot that compares sepal length vs. sepal width. Use the cheat sheet or help to find the correct `geom_` for a scatterplot.
 ```{r}
-
-```
-
-```{r}
-
+ggplot(data = iris, aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
 ```
 
 
@@ -99,12 +95,11 @@ homerange <- read_csv(here("lab9", "data", "Tamburelloetal_HomeRangeDatabase.csv
 ## Practice
 1. What is the structure of the `homerange` data? Does it have any NA's? Is it tidy? Do a quick exploratory analysis of your choice below.
 ```{r}
-
+glimpse(homerange)
+tibble(homerange)
 ```
+Yes, the data is tidy and it has NAs.
 
-```{r}
-
-```
 
 
 ### 1. Scatter Plots
@@ -134,13 +129,11 @@ ggplot(data=homerange, mapping=aes(x=log10.mass, y=log10.hra)) +
 
 ### Practice
 1. What is the relationship between log10.hra and log10.preymass? What do you notice about how ggplot treats NA's?
-```{r}
 
-```
+log10.hra and log10.preymass are directly related so as one variable increases, the other does as well.
 
-```{r}
+I dont think that the NAs are plotted.
 
-```
 
 ### Bar Plot: `geom_bar()`
 The simplest type of bar plot counts the number of observations in a categorical variable. In this case, we want to know how many observations are present in the variable `trophic.guild`. Notice that we do not specify a y-axis because it is count by default.  
@@ -191,43 +184,27 @@ homerange %>%
 ## Practice
 1. Filter the `homerange` data to include `mammals` only.
 ```{r}
-
+mammals_only_homerange <- homerange %>%
+  filter(taxon == "mammals")
 ```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
 
 2. Are there more herbivores or carnivores in mammals? Make a bar plot that shows their relative numbers.
 ```{r}
-
+mammals_only_homerange %>% 
+  ggplot(aes(x=trophic.guild)) + 
+  geom_bar()
 ```
 
-```{r}
 
-```
 
 
 3. Make a bar plot that shows the masses of the top 10 smallest mammals.
 ```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+mammals_only_homerange %>% 
+  top_n(-10, log10.mass) %>% 
+  ggplot(aes(x=reorder(common.name, log10.mass), y=log10.mass))+
+  geom_col()+
+  coord_flip()
 ```
 
 ## That's it, let's take a break!   
