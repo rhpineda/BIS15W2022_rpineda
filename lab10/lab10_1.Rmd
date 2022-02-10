@@ -129,17 +129,15 @@ elephants <- read_csv(here("lab10", "data", "ElephantsMF.csv")) %>%
 1. On midterm 1, I asked how many male and female elephants were represented in the data. How would you make a plot of this?
 ```{r}
 elephants %>%
-  count(sex) %>%
-  ggplot(aes(x=sex,y=n)) + 
-    geom_col()
+  ggplot(aes(x=sex)) + 
+    geom_bar()
 ```
 
 2. How does the age of elephants compare by sex?
 ```{r}
 elephants %>%
   group_by(sex) %>%
-  summarise(mean_age = mean(age)) %>%
-  ggplot(aes(x=sex,y=mean_age)) + 
+  ggplot(aes(x=sex,y=age)) + 
   geom_boxplot(na.rm=T)
 ```
 
@@ -147,8 +145,7 @@ elephants %>%
 ```{r}
 elephants %>%
   group_by(sex) %>%
-  summarise(mean_age = mean(age)) %>%
-  ggplot(aes(x=sex, y=mean_age)) +
+  ggplot(aes(x=age, y=height)) +
     geom_point(na.rm=T) + 
     geom_smooth(method="lm")
 ```
