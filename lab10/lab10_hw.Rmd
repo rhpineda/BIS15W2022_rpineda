@@ -3,9 +3,9 @@ title: "Lab 10 Homework"
 author: "Please Add Your Name Here"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -43,10 +43,9 @@ Yes, the data is tidy.
 
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
 ```{r}
-glimpse((deserts))
 #34786 observations
 deserts %>%
-  count(genus) %>%
+  count(genus) 
 #26 Genera
 deserts %>%
   count(species) %>%
