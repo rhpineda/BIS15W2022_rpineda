@@ -93,6 +93,14 @@ gapminder %>%
   theme_gray()
 ```
 
+```{r}
+gapminder %>% 
+  filter(year==1952 | year==2007) %>% 
+  ggplot(aes(x=lifeExp, group = year, fill = year)) +
+  geom_density(alpha = 0.4)+
+  theme_gray()
+```
+
 
 **4. Your answer above doesn't tell the whole story since life expectancy varies by region. Make a summary that shows the min, mean, and max life expectancy by continent for all years represented in the data.**
 
@@ -121,10 +129,9 @@ gapminder %>%
 
 ```{r}
 gapminder %>%
-  ggplot(aes(x=gdpPercap, y=lifeExp))+
+  ggplot(aes(x=gdpPercap, y=lifeExp, color =  continent, alpha = 0.5))+
   scale_x_log10() +
   geom_point() +
-  geom_smooth(method=lm, se=T) +
   theme_gray()
 ```
 **7. Which countries have had the largest population growth since 1952?**
@@ -183,6 +190,12 @@ gapminder %>%
 
 
 **10. Make one plot of your choice that uses faceting!**
+
+```{r}
+
+```
+
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
