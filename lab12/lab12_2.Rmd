@@ -32,7 +32,7 @@ If you completed part 1 of today's lab then you should have the following packag
 `albersusa`
 ```{r, message = FALSE}
 #install.packages("remotes")
-#remotes::install_github("hrbrmstr/albersusa")
+remotes::install_github("hrbrmstr/albersusa")
 ```
 
 ## Load the libraries
